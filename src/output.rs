@@ -52,7 +52,7 @@ impl OutputFormat {
                 serde_json::to_string_pretty(value).context("failed to render human-readable JSON")
             }
             Self::Json => serde_json::to_string(value).context("failed to render JSON output"),
-            Self::Yaml => serde_yaml::to_string(value).context("failed to render YAML output"),
+            Self::Yaml => yaml_serde::to_string(value).context("failed to render YAML output"),
         }
     }
 }

@@ -82,6 +82,14 @@ pub enum CreateParent {
     },
 }
 
+#[derive(Debug, Clone, Default)]
+pub struct DataSourceQuery {
+    pub filter: Option<Value>,
+    pub sorts: Option<Value>,
+    pub page_size: Option<usize>,
+    pub cursor: Option<String>,
+}
+
 impl NotionClient {
     pub fn new(base_url: impl Into<String>, notion_version: impl Into<String>) -> Result<Self> {
         let http = reqwest::Client::builder()
@@ -321,27 +329,24 @@ impl NotionClient {
         session: &mut RuntimeSession,
         store: &mut ConfigStore,
         data_source_id_or_url: &str,
-        filter: Option<Value>,
-        sorts: Option<Value>,
-        page_size: Option<usize>,
-        cursor: Option<String>,
+        query: DataSourceQuery,
     ) -> Result<ListResponse> {
         let id = normalize_notion_id(data_source_id_or_url)?;
         let mut body = json!({});
 
-        if let Some(value) = filter {
+        if let Some(value) = query.filter {
             body["filter"] = value;
         }
 
-        if let Some(value) = sorts {
+        if let Some(value) = query.sorts {
             body["sorts"] = value;
         }
 
-        if let Some(value) = page_size {
+        if let Some(value) = query.page_size {
             body["page_size"] = json!(value);
         }
 
-        if let Some(value) = cursor {
+        if let Some(value) = query.cursor {
             body["start_cursor"] = json!(value);
         }
 
@@ -1036,12 +1041,11 @@ fn should_retry(status: StatusCode) -> bool {
 }
 
 fn retry_delay(response: &Response, attempt: usize) -> Duration {
-    if let Some(value) = response.headers().get("retry-after") {
-        if let Ok(raw) = value.to_str() {
-            if let Ok(seconds) = raw.parse::<u64>() {
-                return Duration::from_secs(seconds.max(1));
-            }
-        }
+    if let Some(value) = response.headers().get("retry-after")
+        && let Ok(raw) = value.to_str()
+        && let Ok(seconds) = raw.parse::<u64>()
+    {
+        return Duration::from_secs(seconds.max(1));
     }
 
     Duration::from_secs((attempt as u64).min(4))

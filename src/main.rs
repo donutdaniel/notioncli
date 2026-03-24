@@ -18,8 +18,8 @@ use crate::config::{
     AuthType, ConfigStore, ProfileMeta, StoredSecret, read_text_file, slugify_profile_name,
 };
 use crate::notion::{
-    CreateParent, NotionClient, SearchFilter, bot_id_from_user_me, normalize_notion_id,
-    object_kind, owner_email_from_user_me, owner_name_from_user_me,
+    CreateParent, DataSourceQuery, NotionClient, SearchFilter, bot_id_from_user_me,
+    normalize_notion_id, object_kind, owner_email_from_user_me, owner_name_from_user_me,
 };
 use crate::output::OutputFormat;
 
@@ -638,18 +638,18 @@ fn requested_output_format_from_argv() -> OutputFormat {
     let mut iter = args.iter().skip(1);
     while let Some(arg) = iter.next() {
         if arg == "--output" {
-            if let Some(value) = iter.next() {
-                if let Some(format) = parse_output_format(value.to_string_lossy().as_ref()) {
-                    return format;
-                }
+            if let Some(value) = iter.next()
+                && let Some(format) = parse_output_format(value.to_string_lossy().as_ref())
+            {
+                return format;
             }
             continue;
         }
 
-        if let Some(value) = arg.to_string_lossy().strip_prefix("--output=") {
-            if let Some(format) = parse_output_format(value) {
-                return format;
-            }
+        if let Some(value) = arg.to_string_lossy().strip_prefix("--output=")
+            && let Some(format) = parse_output_format(value)
+        {
+            return format;
         }
     }
 
@@ -1105,10 +1105,12 @@ async fn handle_data_source(
                     &mut session,
                     store,
                     &args.data_source,
-                    filter,
-                    sorts,
-                    args.page_size,
-                    args.cursor,
+                    DataSourceQuery {
+                        filter,
+                        sorts,
+                        page_size: args.page_size,
+                        cursor: args.cursor,
+                    },
                 )
                 .await?;
             globals.output.print_success(&response)

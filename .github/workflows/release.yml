@@ -43,11 +43,20 @@ jobs:
         with:
           targets: ${{ matrix.target }}
 
+      - name: Install mold linker (Linux)
+        if: runner.os == 'Linux'
+        run: sudo apt-get install -y mold
+
       - name: Cache Cargo
         uses: Swatinem/rust-cache@v2
+        with:
+          key: ${{ matrix.target }}
 
       - name: Build release binary
         run: cargo build --release --target ${{ matrix.target }}
+        env:
+          CARGO_INCREMENTAL: "0"
+          RUSTFLAGS: ${{ runner.os == 'Linux' && '-C linker=clang -C link-arg=-fuse-ld=mold' || '' }}
 
       - name: Package archive (Unix)
         if: runner.os != 'Windows'
