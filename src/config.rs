@@ -473,12 +473,12 @@ fn runtime_token_override() -> Option<String> {
         .filter(|value| !value.is_empty())
 }
 
-fn set_private_permissions(path: &Path) -> Result<()> {
+fn set_private_permissions(_path: &Path) -> Result<()> {
     #[cfg(unix)]
     {
         let permissions = fs::Permissions::from_mode(0o600);
-        fs::set_permissions(path, permissions)
-            .with_context(|| format!("failed to set private permissions on {}", path.display()))?;
+        fs::set_permissions(_path, permissions)
+            .with_context(|| format!("failed to set private permissions on {}", _path.display()))?;
     }
     Ok(())
 }
