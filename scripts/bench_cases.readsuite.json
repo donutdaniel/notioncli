@@ -1,0 +1,78 @@
+{
+  "cases": [
+    {
+      "name": "current-user",
+      "cli": ["user", "me"],
+      "mcp": {
+        "tool": "notion-get-users",
+        "arguments": {
+          "user_id": "self"
+        }
+      }
+    },
+    {
+      "name": "list-users-page1",
+      "cli": ["user", "list", "--page-size", "1"],
+      "mcp": {
+        "tool": "notion-get-users",
+        "arguments": {
+          "page_size": 1
+        }
+      }
+    },
+    {
+      "name": "search-page",
+      "cli": ["search", "$SEARCH_QUERY", "--type", "page", "--limit", "1"],
+      "mcp": {
+        "tool": "notion-search",
+        "arguments": {
+          "query": "$SEARCH_QUERY",
+          "query_type": "internal",
+          "content_search_mode": "workspace_search",
+          "page_size": 1,
+          "max_highlight_length": 0
+        }
+      }
+    },
+    {
+      "name": "fetch-page",
+      "cli": ["page", "get", "$CONTENT_PAGE_ID"],
+      "mcp": {
+        "tool": "notion-fetch",
+        "arguments": {
+          "id": "$CONTENT_PAGE_ID"
+        }
+      }
+    },
+    {
+      "name": "fetch-database",
+      "cli": ["database", "get", "$DATABASE_ID"],
+      "mcp": {
+        "tool": "notion-fetch",
+        "arguments": {
+          "id": "$DATABASE_ID"
+        }
+      }
+    },
+    {
+      "name": "fetch-data-source",
+      "cli": ["data-source", "get", "$DATA_SOURCE_ID"],
+      "mcp": {
+        "tool": "notion-fetch",
+        "arguments": {
+          "id": "collection://$DATA_SOURCE_ID"
+        }
+      }
+    },
+    {
+      "name": "list-comments",
+      "cli": ["comment", "list", "$CONTENT_PAGE_ID"],
+      "mcp": {
+        "tool": "notion-get-comments",
+        "arguments": {
+          "page_id": "$CONTENT_PAGE_ID"
+        }
+      }
+    }
+  ]
+}

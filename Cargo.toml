@@ -1,0 +1,28 @@
+[package]
+name = "notioncli"
+version = "0.1.0"
+edition = "2024"
+description = "A Rust CLI for the Notion API"
+license = "MIT"
+readme = "README.md"
+repository = "https://github.com/donutdaniel/notioncli"
+homepage = "https://github.com/donutdaniel/notioncli"
+
+[dependencies]
+anyhow = "1"
+clap = { version = "4", features = ["derive", "env"] }
+directories = "5"
+regex = "1"
+reqwest = { version = "0.12", default-features = false, features = ["json", "multipart", "rustls-tls"] }
+rpassword = "7"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+serde_yaml = "0.9"
+tokio = { version = "1", features = ["macros", "rt-multi-thread", "time"] }
+toml = "0.8"
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+
+[dev-dependencies]
+tempfile = "3"
+wiremock = "0.6"

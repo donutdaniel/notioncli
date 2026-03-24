@@ -1,0 +1,30 @@
+{
+  "cases": [
+    {
+      "name": "whoami",
+      "cli": ["auth", "whoami"],
+      "mcp": {
+        "tool": "notion-get-self",
+        "arguments": {}
+      }
+    },
+    {
+      "name": "list-users",
+      "cli": ["user", "list", "--page-size", "1"],
+      "mcp": {
+        "tool": "notion-get-users",
+        "arguments": {}
+      }
+    },
+    {
+      "name": "fetch-page",
+      "cli": ["page", "get", "$PAGE_ID"],
+      "mcp": {
+        "tool": "notion-fetch",
+        "arguments": {
+          "id": "$PAGE_ID"
+        }
+      }
+    }
+  ]
+}
