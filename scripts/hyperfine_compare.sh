@@ -13,6 +13,8 @@ out_dir="${OUT_DIR:-$repo_root/tmp/hyperfine}"
 runs="${RUNS:-20}"
 warmup="${WARMUP:-3}"
 extra_args="${HYPERFINE_ARGS:-}"
+retry_count="${BENCH_CASE_RETRIES:-2}"
+retry_delay_ms="${BENCH_CASE_RETRY_DELAY_MS:-250}"
 
 mkdir -p "$out_dir"
 
@@ -40,10 +42,10 @@ fi
 
 for case_name in "${cases[@]}"; do
   echo "== $case_name =="
-  printf -v cli_cmd 'python3 %q --system cli --case-file %q --case-name %q --cli-bin %q >/dev/null' \
-    "$repo_root/scripts/bench_case_once.py" "$case_file" "$case_name" "$cli_bin"
-  printf -v mcp_cmd 'python3 %q --system mcp --case-file %q --case-name %q >/dev/null' \
-    "$repo_root/scripts/bench_case_once.py" "$case_file" "$case_name"
+  printf -v cli_cmd 'python3 %q --system cli --case-file %q --case-name %q --cli-bin %q --retries %q --retry-delay-ms %q >/dev/null' \
+    "$repo_root/scripts/bench_case_once.py" "$case_file" "$case_name" "$cli_bin" "$retry_count" "$retry_delay_ms"
+  printf -v mcp_cmd 'python3 %q --system mcp --case-file %q --case-name %q --retries %q --retry-delay-ms %q >/dev/null' \
+    "$repo_root/scripts/bench_case_once.py" "$case_file" "$case_name" "$retry_count" "$retry_delay_ms"
 
   # shellcheck disable=SC2086
   hyperfine \

@@ -613,7 +613,9 @@ async fn main() {
     let cli = match Cli::try_parse() {
         Ok(cli) => cli,
         Err(error) => match error.kind() {
-            ErrorKind::DisplayHelp | ErrorKind::DisplayVersion => {
+            ErrorKind::DisplayHelp
+            | ErrorKind::DisplayHelpOnMissingArgumentOrSubcommand
+            | ErrorKind::DisplayVersion => {
                 let _ = error.print();
                 process::exit(0);
             }

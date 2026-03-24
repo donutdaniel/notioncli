@@ -4,10 +4,8 @@
       "name": "current-user",
       "cli": ["user", "me"],
       "mcp": {
-        "tool": "notion-get-users",
-        "arguments": {
-          "user_id": "self"
-        }
+        "tool": "notion-get-self",
+        "arguments": {}
       }
     },
     {

@@ -280,7 +280,7 @@ python3 scripts/notion_mcp_login.py
 python3 scripts/mcp_list_tools.py --schemas
 ```
 
-Built-in timer:
+Built-in timer for quick spot checks:
 
 ```bash
 cp scripts/bench_cases.sample.json /tmp/bench_cases.json
@@ -288,18 +288,18 @@ PAGE_ID="<page-id>" python3 scripts/bench_compare.py \
   --case-file /tmp/bench_cases.json --runs 20 --warmup 3
 ```
 
-External runner with `hyperfine`:
+Supported external benchmark:
+
+```bash
+python3 scripts/bench_strengthen.py --root-parent-id "<page-id>"
+```
+
+Legacy raw `hyperfine` runner for ad hoc suite development:
 
 ```bash
 eval "$(python3 scripts/bench_prepare_comparable.py)"
 CASE_FILE=scripts/bench_cases.comparable.json scripts/hyperfine_compare.sh
 python3 scripts/bench_cleanup_comparable.py
-```
-
-Strengthened benchmark (isolates reads from writes):
-
-```bash
-python3 scripts/bench_strengthen.py --root-parent-id "<page-id>"
 ```
 
 Benchmark scripts:
@@ -322,8 +322,11 @@ Case files: `bench_cases.sample.json`, `bench_cases.comparable.json`,
 Notes:
 
 - `bench_compare.py` reports both `reused_session` and `fresh_session` MCP timings
+- `bench_compare.py` re-expands env placeholders per run, so `$BENCH_NONCE` works in write cases
+- `hyperfine_compare.sh` uses bounded transient retries by default (`BENCH_CASE_RETRIES=2`)
 - `NOTION_MCP_ACCESS_TOKEN` overrides the stored MCP token
 - Case files support `$ENV_VAR` placeholders
+- `bench_strengthen.py` is the supported path for checked-in results; the comparable suite is a legacy mixed-case harness
 
 ## Notes
 

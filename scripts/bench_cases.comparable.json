@@ -4,10 +4,8 @@
       "name": "current-user",
       "cli": ["user", "me"],
       "mcp": {
-        "tool": "notion-get-users",
-        "arguments": {
-          "user_id": "self"
-        }
+        "tool": "notion-get-self",
+        "arguments": {}
       }
     },
     {
@@ -61,6 +59,16 @@
         "tool": "notion-fetch",
         "arguments": {
           "id": "collection://$DATA_SOURCE_ID"
+        }
+      }
+    },
+    {
+      "name": "list-comments",
+      "cli": ["comment", "list", "$CONTENT_PAGE_ID"],
+      "mcp": {
+        "tool": "notion-get-comments",
+        "arguments": {
+          "page_id": "$CONTENT_PAGE_ID"
         }
       }
     },
@@ -156,16 +164,6 @@
               }
             }
           ]
-        }
-      }
-    },
-    {
-      "name": "list-comments",
-      "cli": ["comment", "list", "$CONTENT_PAGE_ID"],
-      "mcp": {
-        "tool": "notion-get-comments",
-        "arguments": {
-          "page_id": "$CONTENT_PAGE_ID"
         }
       }
     },

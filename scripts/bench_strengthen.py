@@ -146,8 +146,7 @@ def summarize_sessions(session_dirs: list[Path]) -> dict[str, Any]:
         mcp_med = metrics["mcp_median_ms"]
         cli_median_of_medians = statistics.median(cli_med)
         mcp_median_of_medians = statistics.median(mcp_med)
-        winner = "cli" if cli_median_of_medians < mcp_median_of_medians else "mcp"
-        if winner == "cli":
+        if cli_median_of_medians < mcp_median_of_medians:
             ratio_text = f"CLI {mcp_median_of_medians / cli_median_of_medians:.2f}x faster"
         else:
             ratio_text = f"MCP {cli_median_of_medians / mcp_median_of_medians:.2f}x faster"
@@ -158,7 +157,6 @@ def summarize_sessions(session_dirs: list[Path]) -> dict[str, Any]:
                 "mcp_session_medians_ms": [round(value, 1) for value in mcp_med],
                 "cli_median_of_medians_ms": round(cli_median_of_medians, 1),
                 "mcp_median_of_medians_ms": round(mcp_median_of_medians, 1),
-                "winner": winner,
                 "ratio_text": ratio_text,
             }
         )
@@ -238,13 +236,12 @@ def run_suite(
 def print_markdown_table(summary: dict[str, Any]) -> None:
     print(f"## {summary['suite'].title()} Suite")
     print("")
-    print("| Case | CLI median of medians (ms) | MCP median of medians (ms) | Winner | Ratio |")
-    print("|---|---:|---:|---|---:|")
+    print("| Case | CLI median of medians (ms) | MCP median of medians (ms) | Ratio |")
+    print("|---|---:|---:|---:|")
     for case in summary["cases"]:
-        winner = case["winner"].upper()
         print(
             f"| `{case['case']}` | {case['cli_median_of_medians_ms']:.1f} | "
-            f"{case['mcp_median_of_medians_ms']:.1f} | {winner} | {case['ratio_text']} |"
+            f"{case['mcp_median_of_medians_ms']:.1f} | {case['ratio_text']} |"
         )
     print("")
 
