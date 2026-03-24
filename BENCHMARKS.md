@@ -21,16 +21,16 @@ universal claim about every CLI vs MCP integration model.
 ## Method
 
 - Snapshot date: `2026-03-24 11:43:27 EDT`
-- Commit: `fc958aab7db662167c3adef4b016ceaf93155616`
+- Code state: local uncommitted worktree during the benchmark run
 - Machine: `Apple M4 Max`
 - OS: `macOS 26.2 (25C56)`
 - Runner: `hyperfine 1.20.0`
 - CLI binary: `./target/release/notioncli`
 - MCP server: `https://mcp.notion.com/mcp`
 - Orchestrator: `scripts/bench_strengthen.py`
-- Raw artifacts: `tmp/bench-publish-20260324/`
+- Raw artifacts: `benchmarks/publish-20260324/`
 - Reported metric: median of session medians from the exported `hyperfine` JSON
-  files in `tmp/bench-publish-20260324/`
+  files in `benchmarks/publish-20260324/`
 - Backend dependency: live Notion REST API and hosted MCP service
 - Transient retry policy: `bench_case_once.py --retries 2 --retry-delay-ms 250`
 - Comparison mode:
@@ -53,9 +53,8 @@ universal claim about every CLI vs MCP integration model.
 - Runs per case: `10`
 - Warmup per case: `2`
 
-This snapshot is stricter than the older mixed comparable suite because it
-separates reads from writes, isolates mutating cases, and repeats the suite
-across multiple sessions.
+This snapshot separates reads from writes, isolates mutating cases, and repeats
+the suite across multiple sessions.
 
 ## Read Suite
 
@@ -103,4 +102,3 @@ across multiple sessions.
   CLI mode would also change the comparison.
 - A different machine, network path, time of day, or Notion-side load can move
   these numbers around.
-- The older mixed comparable-suite snapshot is superseded by this one.

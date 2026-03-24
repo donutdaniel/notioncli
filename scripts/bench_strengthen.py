@@ -60,7 +60,7 @@ def load_case_names(case_file: Path) -> list[str]:
 def prepare_fixture(cli_bin: Path, root_parent_id: str | None, prefix: str) -> dict[str, str]:
     command = [
         "python3",
-        "scripts/bench_prepare_comparable.py",
+        "scripts/bench_prepare_fixture.py",
         "--cli-bin",
         str(cli_bin),
         "--format",
@@ -78,7 +78,7 @@ def cleanup_fixture(cli_bin: Path, container_page_id: str) -> None:
     check_command(
         [
             "python3",
-            "scripts/bench_cleanup_comparable.py",
+            "scripts/bench_cleanup_fixture.py",
             "--cli-bin",
             str(cli_bin),
             "--container-page-id",

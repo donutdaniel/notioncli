@@ -143,7 +143,7 @@ def main() -> None:
     parser.add_argument(
         "--case-file",
         type=Path,
-        default=Path("scripts/bench_cases.readonly.json"),
+        default=Path("scripts/bench_cases.readsuite.json"),
         help="JSON case file describing equivalent CLI and MCP operations",
     )
     parser.add_argument(

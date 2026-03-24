@@ -1,0 +1,106 @@
+{
+  "cases": [
+    {
+      "case": "current-user",
+      "cli_median_of_medians_ms": 332.5,
+      "cli_session_medians_ms": [
+        325.4,
+        339.6
+      ],
+      "mcp_median_of_medians_ms": 822.6,
+      "mcp_session_medians_ms": [
+        832.2,
+        812.9
+      ],
+      "ratio_text": "CLI 2.47x faster"
+    },
+    {
+      "case": "fetch-data-source",
+      "cli_median_of_medians_ms": 399.7,
+      "cli_session_medians_ms": [
+        383.0,
+        416.4
+      ],
+      "mcp_median_of_medians_ms": 1981.2,
+      "mcp_session_medians_ms": [
+        1866.3,
+        2096.1
+      ],
+      "ratio_text": "CLI 4.96x faster"
+    },
+    {
+      "case": "fetch-database",
+      "cli_median_of_medians_ms": 396.1,
+      "cli_session_medians_ms": [
+        400.0,
+        392.1
+      ],
+      "mcp_median_of_medians_ms": 1984.0,
+      "mcp_session_medians_ms": [
+        1737.3,
+        2230.8
+      ],
+      "ratio_text": "CLI 5.01x faster"
+    },
+    {
+      "case": "fetch-page",
+      "cli_median_of_medians_ms": 480.2,
+      "cli_session_medians_ms": [
+        555.6,
+        404.8
+      ],
+      "mcp_median_of_medians_ms": 1438.5,
+      "mcp_session_medians_ms": [
+        1505.0,
+        1372.1
+      ],
+      "ratio_text": "CLI 3.00x faster"
+    },
+    {
+      "case": "list-comments",
+      "cli_median_of_medians_ms": 431.5,
+      "cli_session_medians_ms": [
+        434.7,
+        428.2
+      ],
+      "mcp_median_of_medians_ms": 1414.6,
+      "mcp_session_medians_ms": [
+        1210.7,
+        1618.5
+      ],
+      "ratio_text": "CLI 3.28x faster"
+    },
+    {
+      "case": "list-users-page1",
+      "cli_median_of_medians_ms": 320.1,
+      "cli_session_medians_ms": [
+        314.4,
+        325.7
+      ],
+      "mcp_median_of_medians_ms": 1119.1,
+      "mcp_session_medians_ms": [
+        1114.9,
+        1123.4
+      ],
+      "ratio_text": "CLI 3.50x faster"
+    },
+    {
+      "case": "search-page",
+      "cli_median_of_medians_ms": 499.5,
+      "cli_session_medians_ms": [
+        489.1,
+        510.0
+      ],
+      "mcp_median_of_medians_ms": 1849.0,
+      "mcp_session_medians_ms": [
+        1900.1,
+        1797.8
+      ],
+      "ratio_text": "CLI 3.70x faster"
+    }
+  ],
+  "runs_per_case": 20,
+  "sessions": 2,
+  "suite": "read",
+  "warmup_per_case": 3
+}

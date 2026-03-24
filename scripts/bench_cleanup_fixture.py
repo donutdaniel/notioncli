@@ -9,7 +9,7 @@ import sys
 
 def main() -> None:
     parser = argparse.ArgumentParser(
-        description="Trash the disposable container page used for comparable benchmarks."
+        description="Trash the disposable container page used for benchmark fixtures."
     )
     parser.add_argument(
         "--cli-bin",

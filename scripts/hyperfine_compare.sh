@@ -7,7 +7,7 @@ if ! command -v hyperfine >/dev/null 2>&1; then
 fi
 
 repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-case_file="${CASE_FILE:-$repo_root/scripts/bench_cases.readonly.json}"
+case_file="${CASE_FILE:-$repo_root/scripts/bench_cases.readsuite.json}"
 cli_bin="${CLI_BIN:-$repo_root/target/release/notioncli}"
 out_dir="${OUT_DIR:-$repo_root/tmp/hyperfine}"
 runs="${RUNS:-20}"

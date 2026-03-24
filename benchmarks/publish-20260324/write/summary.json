@@ -1,0 +1,92 @@
+{
+  "cases": [
+    {
+      "case": "create-comment",
+      "cli_median_of_medians_ms": 770.6,
+      "cli_session_medians_ms": [
+        616.7,
+        924.5
+      ],
+      "mcp_median_of_medians_ms": 1315.7,
+      "mcp_session_medians_ms": [
+        1085.5,
+        1545.8
+      ],
+      "ratio_text": "CLI 1.71x faster"
+    },
+    {
+      "case": "create-database",
+      "cli_median_of_medians_ms": 1588.0,
+      "cli_session_medians_ms": [
+        1880.6,
+        1295.4
+      ],
+      "mcp_median_of_medians_ms": 1389.0,
+      "mcp_session_medians_ms": [
+        1277.1,
+        1500.9
+      ],
+      "ratio_text": "MCP 1.14x faster"
+    },
+    {
+      "case": "create-page-under-page",
+      "cli_median_of_medians_ms": 673.5,
+      "cli_session_medians_ms": [
+        678.7,
+        668.2
+      ],
+      "mcp_median_of_medians_ms": 1414.9,
+      "mcp_session_medians_ms": [
+        1180.6,
+        1649.1
+      ],
+      "ratio_text": "CLI 2.10x faster"
+    },
+    {
+      "case": "create-row-under-data-source",
+      "cli_median_of_medians_ms": 1284.2,
+      "cli_session_medians_ms": [
+        1254.4,
+        1314.1
+      ],
+      "mcp_median_of_medians_ms": 1639.8,
+      "mcp_session_medians_ms": [
+        1455.2,
+        1824.5
+      ],
+      "ratio_text": "CLI 1.28x faster"
+    },
+    {
+      "case": "update-data-source-title",
+      "cli_median_of_medians_ms": 1122.5,
+      "cli_session_medians_ms": [
+        1005.0,
+        1240.1
+      ],
+      "mcp_median_of_medians_ms": 2190.6,
+      "mcp_session_medians_ms": [
+        2543.6,
+        1837.5
+      ],
+      "ratio_text": "CLI 1.95x faster"
+    },
+    {
+      "case": "update-page-title",
+      "cli_median_of_medians_ms": 936.0,
+      "cli_session_medians_ms": [
+        1127.4,
+        744.7
+      ],
+      "mcp_median_of_medians_ms": 1220.5,
+      "mcp_session_medians_ms": [
+        1095.2,
+        1345.8
+      ],
+      "ratio_text": "CLI 1.30x faster"
+    }
+  ],
+  "runs_per_case": 10,
+  "sessions": 2,
+  "suite": "write",
+  "warmup_per_case": 2
+}

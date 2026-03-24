@@ -280,26 +280,10 @@ python3 scripts/notion_mcp_login.py
 python3 scripts/mcp_list_tools.py --schemas
 ```
 
-Built-in timer for quick spot checks:
-
-```bash
-cp scripts/bench_cases.sample.json /tmp/bench_cases.json
-PAGE_ID="<page-id>" python3 scripts/bench_compare.py \
-  --case-file /tmp/bench_cases.json --runs 20 --warmup 3
-```
-
 Supported external benchmark:
 
 ```bash
 python3 scripts/bench_strengthen.py --root-parent-id "<page-id>"
-```
-
-Legacy raw `hyperfine` runner for ad hoc suite development:
-
-```bash
-eval "$(python3 scripts/bench_prepare_comparable.py)"
-CASE_FILE=scripts/bench_cases.comparable.json scripts/hyperfine_compare.sh
-python3 scripts/bench_cleanup_comparable.py
 ```
 
 Benchmark scripts:
@@ -309,24 +293,19 @@ Benchmark scripts:
 | `notion_mcp_login.py` | MCP OAuth flow, stores local token |
 | `mcp_list_tools.py` | List MCP tools and schemas |
 | `bench_case_once.py` | Run one benchmark case |
-| `bench_compare.py` | Compare CLI vs MCP from a JSON case file |
-| `bench_prepare_comparable.py` | Create disposable fixtures (`eval` the output) |
-| `bench_cleanup_comparable.py` | Trash fixture container |
+| `bench_prepare_fixture.py` | Create disposable fixtures |
+| `bench_cleanup_fixture.py` | Trash fixture container |
 | `bench_strengthen.py` | Repeated suites with fixture isolation |
-| `hyperfine_compare.sh` | External `hyperfine`-based comparison |
+| `hyperfine_compare.sh` | `hyperfine` runner used by `bench_strengthen.py` |
 
-Case files: `bench_cases.sample.json`, `bench_cases.comparable.json`,
-`bench_cases.readsuite.json`, `bench_cases.writesuite.json`,
-`bench_cases.readonly.json`.
+Case files: `bench_cases.readsuite.json`, `bench_cases.writesuite.json`.
 
 Notes:
 
-- `bench_compare.py` reports both `reused_session` and `fresh_session` MCP timings
-- `bench_compare.py` re-expands env placeholders per run, so `$BENCH_NONCE` works in write cases
 - `hyperfine_compare.sh` uses bounded transient retries by default (`BENCH_CASE_RETRIES=2`)
 - `NOTION_MCP_ACCESS_TOKEN` overrides the stored MCP token
 - Case files support `$ENV_VAR` placeholders
-- `bench_strengthen.py` is the supported path for checked-in results; the comparable suite is a legacy mixed-case harness
+- `bench_strengthen.py` is the supported path for checked-in results
 
 ## Notes
 

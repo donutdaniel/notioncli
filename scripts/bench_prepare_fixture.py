@@ -49,7 +49,7 @@ def print_shell_exports(values: dict[str, str]) -> None:
 
 def main() -> None:
     parser = argparse.ArgumentParser(
-        description="Create a disposable fixture set for the comparable CLI-vs-MCP benchmark suite."
+        description="Create a disposable fixture set for the benchmark suite."
     )
     parser.add_argument(
         "--cli-bin",
