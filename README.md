@@ -7,6 +7,12 @@ machine-stable formats.
 
 ## Install
 
+Homebrew (macOS / Linux):
+
+```bash
+brew install donutdaniel/tap/notioncli
+```
+
 From source (requires [Rust toolchain](https://rustup.rs)):
 
 ```bash
