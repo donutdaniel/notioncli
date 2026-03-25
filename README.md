@@ -7,25 +7,15 @@ machine-stable formats.
 
 ## Install
 
-Homebrew (macOS / Linux):
+Pick **one** of the following:
 
-```bash
-brew install donutdaniel/tap/notioncli
-```
+| Method | Command / Steps |
+|---|---|
+| **Homebrew** (macOS / Linux) | `brew install donutdaniel/tap/notioncli` |
+| **Cargo** (requires [Rust toolchain](https://rustup.rs)) | `cargo install --path .` |
+| **Binary** ([GitHub Releases](https://github.com/donutdaniel/notioncli/releases)) | Download the archive for your platform, extract it, and move `notioncli` somewhere on your `PATH` (e.g. `~/.local/bin`) |
 
-From source (requires [Rust toolchain](https://rustup.rs)):
-
-```bash
-cargo install --path .
-```
-
-From [GitHub Releases](https://github.com/donutdaniel/notioncli/releases):
-
-1. Download the archive for your platform.
-2. Extract it.
-3. Move `notioncli` somewhere on your `PATH` (e.g. `~/.local/bin`).
-
-For local development:
+For local development, build without installing:
 
 ```bash
 cargo build --release
